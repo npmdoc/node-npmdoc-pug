@@ -1,11 +1,13 @@
-# api documentation for  [pug (v0.1.0)](http://jade-lang.com)  [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-pug.svg)](https://travis-ci.org/npmdoc/node-npmdoc-pug)
+# api documentation for  [pug (v0.1.0)](http://jade-lang.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-pug.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-pug) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-pug.svg)](https://travis-ci.org/npmdoc/node-npmdoc-pug)
 #### A clean, whitespace-sensitive template language for writing HTML
 
 [![NPM](https://nodei.co/npm/pug.png?downloads=true)](https://www.npmjs.com/package/pug)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-pug/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-pug_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-pug/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-pug/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-pug_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-pug/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-pug/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-pug/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-pug/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -125,15 +127,6 @@
 1.  object <span class="apidocSignatureSpan">pug.</span>cache
 1.  object <span class="apidocSignatureSpan">pug.</span>filters
 1.  object <span class="apidocSignatureSpan">pug.</span>runtime
-
-#### [module pug.runtime](#apidoc.module.pug.runtime)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>attr (key, val, escaped, terse)](#apidoc.element.pug.runtime.attr)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>attrs (obj, terse)](#apidoc.element.pug.runtime.attrs)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>classes (val, escaping)](#apidoc.element.pug.runtime.classes)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>escape (_html)](#apidoc.element.pug.runtime.escape)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>merge (a, b)](#apidoc.element.pug.runtime.merge)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>rethrow (err, filename, lineno, str)](#apidoc.element.pug.runtime.rethrow)
-1.  [function <span class="apidocSignatureSpan">pug.runtime.</span>style (val)](#apidoc.element.pug.runtime.style)
 
 
 
@@ -282,7 +275,23 @@ compileFileClient = function (path, options){
 ```
 - example usage
 ```shell
-n/a
+...
+
+
+
+var jade = require('./');
+var resolvedJade = require.resolve('./');
+
+function compileTemplate(module, filename) {
+var template = jade.compileFileClient(filename, {inlineRuntimeFunctions: false});
+var body = "var jade = require('" + resolvedJade + "').runtime;\n\n" +
+           "module.exports = " + template + ";";
+module._compile(body, filename);
+}
+
+if (require.extensions) {
+require.extensions['.jade'] = compileTemplate
+...
 ```
 
 #### <a name="apidoc.element.pug.render"></a>[function <span class="apidocSignatureSpan">pug.</span>render (str, options, fn)](#apidoc.element.pug.render)
@@ -376,216 +385,6 @@ var html = jade.renderFile('filename.jade', merge(options, locals));
 - 'compileDebug'  When 'false' no debug instrumentation is compiled
 - 'pretty'    Add pretty-indentation whitespace to output _(false by default)_
 ...
-```
-
-
-
-# <a name="apidoc.module.pug.runtime"></a>[module pug.runtime](#apidoc.module.pug.runtime)
-
-#### <a name="apidoc.element.pug.runtime.attr"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>attr (key, val, escaped, terse)](#apidoc.element.pug.runtime.attr)
-- description and source-code
-```javascript
-function jade_attr(key, val, escaped, terse) {
-  if (val === false || val == null || !val && (key === 'class' || key === 'style')) {
-    return '';
-  }
-  if (val === true) {
-    return ' ' + (terse ? key : key + '="' + key + '"');
-  }
-  if (typeof val.toISOString === 'function') {
-    val = val.toISOString();
-  } else if (typeof val !== 'string') {
-    val = JSON.stringify(val);
-    if (!escaped && val.indexOf('"') !== -1) {
-      return ' ' + key + '=\'' + val.replace(/'/g, '&#39;') + '\'';
-    }
-  }
-  if (escaped) val = jade_escape(val);
-  return ' ' + key + '="' + val + '"';
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.runtime.attrs"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>attrs (obj, terse)](#apidoc.element.pug.runtime.attrs)
-- description and source-code
-```javascript
-function jade_attrs(obj, terse){
-  var attrs = '';
-
-  var keys = Object.keys(obj);
-  for (var i = 0; i < keys.length; ++i) {
-    var key = keys[i]
-      , val = obj[key];
-
-    if ('class' === key) {
-      val = jade_classes(val);
-      attrs = jade_attr(key, val, false, terse) + attrs;
-      continue;
-    }
-    if ('style' === key) {
-      val = jade_style(val);
-    }
-    attrs += jade_attr(key, val, false, terse);
-  }
-
-  return attrs;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.runtime.classes"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>classes (val, escaping)](#apidoc.element.pug.runtime.classes)
-- description and source-code
-```javascript
-function jade_classes(val, escaping) {
-  if (Array.isArray(val)) {
-    return jade_classes_array(val, escaping);
-  } else if (val && typeof val === 'object') {
-    return jade_classes_object(val);
-  } else {
-    return val || '';
-  }
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.runtime.escape"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>escape (_html)](#apidoc.element.pug.runtime.escape)
-- description and source-code
-```javascript
-function jade_escape(_html){
-  var html = '' + _html;
-  var regexResult = jade_match_html.exec(html);
-  if (!regexResult) return _html;
-
-  var result = '';
-  var i, lastIndex, escape;
-  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
-    switch (html.charCodeAt(i)) {
-      case 34: escape = '&quot;'; break;
-      case 38: escape = '&amp;'; break;
-      case 60: escape = '&lt;'; break;
-      case 62: escape = '&gt;'; break;
-      default: continue;
-    }
-    if (lastIndex !== i) result += html.substring(lastIndex, i);
-    lastIndex = i + 1;
-    result += escape;
-  }
-  if (lastIndex !== i) return result + html.substring(lastIndex, i);
-  else return result;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.runtime.merge"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>merge (a, b)](#apidoc.element.pug.runtime.merge)
-- description and source-code
-```javascript
-function jade_merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i < a.length; i++) {
-      attrs = jade_merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-
-  for (var key in b) {
-    if (key === 'class') {
-      var valA = a[key] || [];
-      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
-    } else if (key === 'style') {
-      var valA = jade_style(a[key]);
-      var valB = jade_style(b[key]);
-      a[key] = valA + (valA && valB && ';') + valB;
-    } else {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.runtime.rethrow"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>rethrow (err, filename, lineno, str)](#apidoc.element.pug.runtime.rethrow)
-- description and source-code
-```javascript
-function jade_rethrow(err, filename, lineno, str){
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != 'undefined' || !filename) && !str) {
-    err.message += ' on line ' + lineno;
-    throw err;
-  }
-  try {
-    str = str || require('fs').readFileSync(filename, 'utf8')
-  } catch (ex) {
-    jade_rethrow(err, null, lineno)
-  }
-  var context = 3
-    , lines = str.split('\n')
-    , start = Math.max(lineno - context, 0)
-    , end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines.slice(start, end).map(function(line, i){
-    var curr = i + start + 1;
-    return (curr == lineno ? '  > ' : '    ')
-      + curr
-      + '| '
-      + line;
-  }).join('\n');
-
-  // Alter exception message
-  err.path = filename;
-  err.message = (filename || 'Jade') + ':' + lineno
-    + '\n' + context + '\n\n' + err.message;
-  throw err;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.runtime.style"></a>[function <span class="apidocSignatureSpan">pug.runtime.</span>style (val)](#apidoc.element.pug.runtime.style)
-- description and source-code
-```javascript
-function jade_style(val) {
-  if (!val) return '';
-  if (typeof val === 'object') {
-    var out = '', delim = '';
-    for (var style in val) {
-<span class="apidocCodeCommentSpan">      /* istanbul ignore else */
-</span>      if (jade_has_own_property.call(val, style)) {
-        out = out + delim + style + ':' + val[style];
-        delim = ';';
-      }
-    }
-    return out;
-  } else {
-    val = '' + val;
-    if (val[val.length - 1] === ';') return val.slice(0, -1);
-    return val;
-  }
-}
-```
-- example usage
-```shell
-n/a
 ```
 
 
