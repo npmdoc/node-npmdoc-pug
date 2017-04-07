@@ -1,0 +1,746 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="http://jade-lang.com">pug (v0.1.0)</a>
+</h1>
+<h4>A clean, whitespace-sensitive template language for writing HTML</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pug">module pug</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.__express">
+            function <span class="apidocSignatureSpan">pug.</span>__express
+            <span class="apidocSignatureSpan">(path, options, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.compile">
+            function <span class="apidocSignatureSpan">pug.</span>compile
+            <span class="apidocSignatureSpan">(str, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.compileClient">
+            function <span class="apidocSignatureSpan">pug.</span>compileClient
+            <span class="apidocSignatureSpan">(str, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.compileClientWithDependenciesTracked">
+            function <span class="apidocSignatureSpan">pug.</span>compileClientWithDependenciesTracked
+            <span class="apidocSignatureSpan">(str, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.compileFile">
+            function <span class="apidocSignatureSpan">pug.</span>compileFile
+            <span class="apidocSignatureSpan">(path, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.compileFileClient">
+            function <span class="apidocSignatureSpan">pug.</span>compileFileClient
+            <span class="apidocSignatureSpan">(path, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.render">
+            function <span class="apidocSignatureSpan">pug.</span>render
+            <span class="apidocSignatureSpan">(str, options, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.renderFile">
+            function <span class="apidocSignatureSpan">pug.</span>renderFile
+            <span class="apidocSignatureSpan">(path, options, fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pug.</span>cache</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pug.</span>filters</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">pug.</span>runtime</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.pug.runtime">module pug.runtime</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.attr">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>attr
+            <span class="apidocSignatureSpan">(key, val, escaped, terse)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.attrs">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>attrs
+            <span class="apidocSignatureSpan">(obj, terse)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.classes">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>classes
+            <span class="apidocSignatureSpan">(val, escaping)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.escape">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>escape
+            <span class="apidocSignatureSpan">(_html)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.merge">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>merge
+            <span class="apidocSignatureSpan">(a, b)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.rethrow">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>rethrow
+            <span class="apidocSignatureSpan">(err, filename, lineno, str)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.style">
+            function <span class="apidocSignatureSpan">pug.runtime.</span>style
+            <span class="apidocSignatureSpan">(val)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pug" id="apidoc.module.pug">module pug</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pug.__express" id="apidoc.element.pug.__express">
+        function <span class="apidocSignatureSpan">pug.</span>__express
+        <span class="apidocSignatureSpan">(path, options, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">__express = function (path, options, fn) {
+  if(options.compileDebug == undefined &amp;&amp; process.env.NODE_ENV === 'production') {
+    options.compileDebug = false;
+  }
+  exports.renderFile(path, options, fn);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.compile" id="apidoc.element.pug.compile">
+        function <span class="apidocSignatureSpan">pug.</span>compile
+        <span class="apidocSignatureSpan">(str, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compile = function (str, options){
+  var options = options || {}
+
+  str = String(str);
+
+  var parsed = compileBody(str, {
+    compileDebug: options.compileDebug !== false,
+    filename: options.filename,
+    basedir: options.basedir,
+    pretty: options.pretty,
+    doctype: options.doctype,
+    inlineRuntimeFunctions: options.inlineRuntimeFunctions,
+    globals: options.globals,
+    self: options.self,
+    includeSources: options.compileDebug === true,
+    debug: options.debug,
+    templateName: 'template'
+  });
+
+  var res = options.inlineRuntimeFunctions
+    ? new Function('', parsed.body + ';return template;')()
+    : runtimeWrap(parsed.body);
+
+  res.dependencies = parsed.dependencies;
+
+  return res;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+For full API, see [jade-lang.com/api](http://jade-lang.com/api/)
+
+```js
+var jade = require('jade');
+
+// compile
+var fn = jade.<span class="apidocCodeKeywordSpan">compile</span>('string of jade', options);
+var html = fn(locals);
+
+// render
+var html = jade.render('string of jade', merge(options, locals));
+
+// renderFile
+var html = jade.renderFile('filename.jade', merge(options, locals));
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.compileClient" id="apidoc.element.pug.compileClient">
+        function <span class="apidocSignatureSpan">pug.</span>compileClient
+        <span class="apidocSignatureSpan">(str, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compileClient = function (str, options) {
+  return exports.compileClientWithDependenciesTracked(str, options).body;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.compileClientWithDependenciesTracked" id="apidoc.element.pug.compileClientWithDependenciesTracked">
+        function <span class="apidocSignatureSpan">pug.</span>compileClientWithDependenciesTracked
+        <span class="apidocSignatureSpan">(str, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compileClientWithDependenciesTracked = function (str, options){
+  var options = options || {};
+
+  str = String(str);
+  var parsed = compileBody(str, {
+    compileDebug: options.compileDebug,
+    filename: options.filename,
+    basedir: options.basedir,
+    pretty: options.pretty,
+    doctype: options.doctype,
+    inlineRuntimeFunctions: options.inlineRuntimeFunctions !== false,
+    globals: options.globals,
+    self: options.self,
+    includeSources: options.compileDebug,
+    debug: options.debug,
+    templateName: options.name || 'template'
+  });
+
+  return {body: parsed.body, dependencies: parsed.dependencies};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.compileFile" id="apidoc.element.pug.compileFile">
+        function <span class="apidocSignatureSpan">pug.</span>compileFile
+        <span class="apidocSignatureSpan">(path, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compileFile = function (path, options) {
+  options = options || {};
+  options.filename = path;
+  return handleTemplateCache(options);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.compileFileClient" id="apidoc.element.pug.compileFileClient">
+        function <span class="apidocSignatureSpan">pug.</span>compileFileClient
+        <span class="apidocSignatureSpan">(path, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">compileFileClient = function (path, options){
+  var key = path + ':client';
+  options = options || {};
+
+  options.filename = path;
+
+  if (options.cache &amp;&amp; exports.cache[key]) {
+    return exports.cache[key];
+  }
+
+  var str = fs.readFileSync(options.filename, 'utf8');
+  var out = exports.compileClient(str, options);
+  if (options.cache) exports.cache[key] = out;
+  return out;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+
+
+var jade = require('./');
+var resolvedJade = require.resolve('./');
+
+function compileTemplate(module, filename) {
+var template = jade.<span class="apidocCodeKeywordSpan">compileFileClient</span>(filename, {inlineRuntimeFunctions: false});
+var body = "var jade = require('" + resolvedJade + "').runtime;\n\n" +
+           "module.exports = " + template + ";";
+module._compile(body, filename);
+}
+
+if (require.extensions) {
+require.extensions['.jade'] = compileTemplate
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.render" id="apidoc.element.pug.render">
+        function <span class="apidocSignatureSpan">pug.</span>render
+        <span class="apidocSignatureSpan">(str, options, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">render = function (str, options, fn){
+  // support callback API
+  if ('function' == typeof options) {
+    fn = options, options = undefined;
+  }
+  if (typeof fn === 'function') {
+    var res
+    try {
+      res = exports.render(str, options);
+    } catch (ex) {
+      return fn(ex);
+    }
+    return fn(null, res);
+  }
+
+  options = options || {};
+
+  // cache requires .filename
+  if (options.cache &amp;&amp; !options.filename) {
+    throw new Error('the "filename" option is required for caching');
+  }
+
+  return handleTemplateCache(options, str)(options);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var jade = require('jade');
+
+// compile
+var fn = jade.compile('string of jade', options);
+var html = fn(locals);
+
+// render
+var html = jade.<span class="apidocCodeKeywordSpan">render</span>('string of jade', merge(options, locals));
+
+// renderFile
+var html = jade.renderFile('filename.jade', merge(options, locals));
+```
+
+### Options
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.renderFile" id="apidoc.element.pug.renderFile">
+        function <span class="apidocSignatureSpan">pug.</span>renderFile
+        <span class="apidocSignatureSpan">(path, options, fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">renderFile = function (path, options, fn){
+  // support callback API
+  if ('function' == typeof options) {
+    fn = options, options = undefined;
+  }
+  if (typeof fn === 'function') {
+    var res
+    try {
+      res = exports.renderFile(path, options);
+    } catch (ex) {
+      return fn(ex);
+    }
+    return fn(null, res);
+  }
+
+  options = options || {};
+
+  options.filename = path;
+  return handleTemplateCache(options)(options);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var fn = jade.compile('string of jade', options);
+var html = fn(locals);
+
+// render
+var html = jade.render('string of jade', merge(options, locals));
+
+// renderFile
+var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>('filename.jade', merge(options, locals));
+```
+
+### Options
+
+- `filename`  Used in exceptions, and required when using includes
+- `compileDebug`  When `false` no debug instrumentation is compiled
+- `pretty`    Add pretty-indentation whitespace to output _(false by default)_
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.pug.runtime" id="apidoc.module.pug.runtime">module pug.runtime</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.attr" id="apidoc.element.pug.runtime.attr">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>attr
+        <span class="apidocSignatureSpan">(key, val, escaped, terse)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_attr(key, val, escaped, terse) {
+  if (val === false || val == null || !val &amp;&amp; (key === 'class' || key === 'style')) {
+    return '';
+  }
+  if (val === true) {
+    return ' ' + (terse ? key : key + '="' + key + '"');
+  }
+  if (typeof val.toISOString === 'function') {
+    val = val.toISOString();
+  } else if (typeof val !== 'string') {
+    val = JSON.stringify(val);
+    if (!escaped &amp;&amp; val.indexOf('"') !== -1) {
+      return ' ' + key + '=\'' + val.replace(/'/g, '&amp;#39;') + '\'';
+    }
+  }
+  if (escaped) val = jade_escape(val);
+  return ' ' + key + '="' + val + '"';
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.attrs" id="apidoc.element.pug.runtime.attrs">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>attrs
+        <span class="apidocSignatureSpan">(obj, terse)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_attrs(obj, terse){
+  var attrs = '';
+
+  var keys = Object.keys(obj);
+  for (var i = 0; i &lt; keys.length; ++i) {
+    var key = keys[i]
+      , val = obj[key];
+
+    if ('class' === key) {
+      val = jade_classes(val);
+      attrs = jade_attr(key, val, false, terse) + attrs;
+      continue;
+    }
+    if ('style' === key) {
+      val = jade_style(val);
+    }
+    attrs += jade_attr(key, val, false, terse);
+  }
+
+  return attrs;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.classes" id="apidoc.element.pug.runtime.classes">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>classes
+        <span class="apidocSignatureSpan">(val, escaping)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_classes(val, escaping) {
+  if (Array.isArray(val)) {
+    return jade_classes_array(val, escaping);
+  } else if (val &amp;&amp; typeof val === 'object') {
+    return jade_classes_object(val);
+  } else {
+    return val || '';
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.escape" id="apidoc.element.pug.runtime.escape">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>escape
+        <span class="apidocSignatureSpan">(_html)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_escape(_html){
+  var html = '' + _html;
+  var regexResult = jade_match_html.exec(html);
+  if (!regexResult) return _html;
+
+  var result = '';
+  var i, lastIndex, escape;
+  for (i = regexResult.index, lastIndex = 0; i &lt; html.length; i++) {
+    switch (html.charCodeAt(i)) {
+      case 34: escape = '&amp;quot;'; break;
+      case 38: escape = '&amp;amp;'; break;
+      case 60: escape = '&amp;lt;'; break;
+      case 62: escape = '&amp;gt;'; break;
+      default: continue;
+    }
+    if (lastIndex !== i) result += html.substring(lastIndex, i);
+    lastIndex = i + 1;
+    result += escape;
+  }
+  if (lastIndex !== i) return result + html.substring(lastIndex, i);
+  else return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.merge" id="apidoc.element.pug.runtime.merge">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>merge
+        <span class="apidocSignatureSpan">(a, b)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_merge(a, b) {
+  if (arguments.length === 1) {
+    var attrs = a[0];
+    for (var i = 1; i &lt; a.length; i++) {
+      attrs = jade_merge(attrs, a[i]);
+    }
+    return attrs;
+  }
+
+  for (var key in b) {
+    if (key === 'class') {
+      var valA = a[key] || [];
+      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
+    } else if (key === 'style') {
+      var valA = jade_style(a[key]);
+      var valB = jade_style(b[key]);
+      a[key] = valA + (valA &amp;&amp; valB &amp;&amp; ';') + valB;
+    } else {
+      a[key] = b[key];
+    }
+  }
+
+  return a;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.rethrow" id="apidoc.element.pug.runtime.rethrow">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>rethrow
+        <span class="apidocSignatureSpan">(err, filename, lineno, str)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_rethrow(err, filename, lineno, str){
+  if (!(err instanceof Error)) throw err;
+  if ((typeof window != 'undefined' || !filename) &amp;&amp; !str) {
+    err.message += ' on line ' + lineno;
+    throw err;
+  }
+  try {
+    str = str || require('fs').readFileSync(filename, 'utf8')
+  } catch (ex) {
+    jade_rethrow(err, null, lineno)
+  }
+  var context = 3
+    , lines = str.split('\n')
+    , start = Math.max(lineno - context, 0)
+    , end = Math.min(lines.length, lineno + context);
+
+  // Error context
+  var context = lines.slice(start, end).map(function(line, i){
+    var curr = i + start + 1;
+    return (curr == lineno ? '  &gt; ' : '    ')
+      + curr
+      + '| '
+      + line;
+  }).join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  err.message = (filename || 'Jade') + ':' + lineno
+    + '\n' + context + '\n\n' + err.message;
+  throw err;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.pug.runtime.style" id="apidoc.element.pug.runtime.style">
+        function <span class="apidocSignatureSpan">pug.runtime.</span>style
+        <span class="apidocSignatureSpan">(val)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jade_style(val) {
+  if (!val) return '';
+  if (typeof val === 'object') {
+    var out = '', delim = '';
+    for (var style in val) {
+<span class="apidocCodeCommentSpan">      /* istanbul ignore else */
+</span>      if (jade_has_own_property.call(val, style)) {
+        out = out + delim + style + ':' + val[style];
+        delim = ';';
+      }
+    }
+    return out;
+  } else {
+    val = '' + val;
+    if (val[val.length - 1] === ';') return val.slice(0, -1);
+    return val;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>

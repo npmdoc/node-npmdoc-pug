@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="http://jade-lang.com"
-
-    >pug (v0.1.0)</a>
+    <a href="http://jade-lang.com">pug (v0.1.0)</a>
 </h1>
 <h4>A clean, whitespace-sensitive template language for writing HTML</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.pug">module pug</a><ol>
 
@@ -167,7 +160,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">__express = function (path, options, fn) {
-  if(options.compileDebug == undefined &#x26;&#x26; process.env.NODE_ENV === &#x27;production&#x27;) {
+  if(options.compileDebug == undefined &amp;&amp; process.env.NODE_ENV === 'production') {
     options.compileDebug = false;
   }
   exports.renderFile(path, options, fn);
@@ -200,11 +193,11 @@
     self: options.self,
     includeSources: options.compileDebug === true,
     debug: options.debug,
-    templateName: &#x27;template&#x27;
+    templateName: 'template'
   });
 
   var res = options.inlineRuntimeFunctions
-    ? new Function(&#x27;&#x27;, parsed.body + &#x27;;return template;&#x27;)()
+    ? new Function('', parsed.body + ';return template;')()
     : runtimeWrap(parsed.body);
 
   res.dependencies = parsed.dependencies;
@@ -216,17 +209,17 @@
 For full API, see [jade-lang.com/api](http://jade-lang.com/api/)
 
 ```js
-var jade = require(&#x27;jade&#x27;);
+var jade = require('jade');
 
 // compile
-var fn = jade.<span class="apidocCodeKeywordSpan">compile</span>(&#x27;string of jade&#x27;, options);
+var fn = jade.<span class="apidocCodeKeywordSpan">compile</span>('string of jade', options);
 var html = fn(locals);
 
 // render
-var html = jade.render(&#x27;string of jade&#x27;, merge(options, locals));
+var html = jade.render('string of jade', merge(options, locals));
 
 // renderFile
-var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
+var html = jade.renderFile('filename.jade', merge(options, locals));
 ...</pre></li>
     </ul>
 
@@ -269,7 +262,7 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
     self: options.self,
     includeSources: options.compileDebug,
     debug: options.debug,
-    templateName: options.name || &#x27;template&#x27;
+    templateName: options.name || 'template'
   });
 
   return {body: parsed.body, dependencies: parsed.dependencies};
@@ -304,16 +297,16 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">compileFileClient = function (path, options){
-  var key = path + &#x27;:client&#x27;;
+  var key = path + ':client';
   options = options || {};
 
   options.filename = path;
 
-  if (options.cache &#x26;&#x26; exports.cache[key]) {
+  if (options.cache &amp;&amp; exports.cache[key]) {
     return exports.cache[key];
   }
 
-  var str = fs.readFileSync(options.filename, &#x27;utf8&#x27;);
+  var str = fs.readFileSync(options.filename, 'utf8');
   var out = exports.compileClient(str, options);
   if (options.cache) exports.cache[key] = out;
   return out;
@@ -322,18 +315,18 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
 
 
 
-var jade = require(&#x27;./&#x27;);
-var resolvedJade = require.resolve(&#x27;./&#x27;);
+var jade = require('./');
+var resolvedJade = require.resolve('./');
 
 function compileTemplate(module, filename) {
 var template = jade.<span class="apidocCodeKeywordSpan">compileFileClient</span>(filename, {inlineRuntimeFunctions: false});
-var body = &#x22;var jade = require(&#x27;&#x22; + resolvedJade + &#x22;&#x27;).runtime;\n\n&#x22; +
-           &#x22;module.exports = &#x22; + template + &#x22;;&#x22;;
+var body = "var jade = require('" + resolvedJade + "').runtime;\n\n" +
+           "module.exports = " + template + ";";
 module._compile(body, filename);
 }
 
 if (require.extensions) {
-require.extensions[&#x27;.jade&#x27;] = compileTemplate
+require.extensions['.jade'] = compileTemplate
 ...</pre></li>
     </ul>
 
@@ -348,10 +341,10 @@ require.extensions[&#x27;.jade&#x27;] = compileTemplate
     <ul>
     <li>description and source-code<pre class="apidocCodePre">render = function (str, options, fn){
   // support callback API
-  if (&#x27;function&#x27; == typeof options) {
+  if ('function' == typeof options) {
     fn = options, options = undefined;
   }
-  if (typeof fn === &#x27;function&#x27;) {
+  if (typeof fn === 'function') {
     var res
     try {
       res = exports.render(str, options);
@@ -364,24 +357,24 @@ require.extensions[&#x27;.jade&#x27;] = compileTemplate
   options = options || {};
 
   // cache requires .filename
-  if (options.cache &#x26;&#x26; !options.filename) {
-    throw new Error(&#x27;the &#x22;filename&#x22; option is required for caching&#x27;);
+  if (options.cache &amp;&amp; !options.filename) {
+    throw new Error('the "filename" option is required for caching');
   }
 
   return handleTemplateCache(options, str)(options);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var jade = require(&#x27;jade&#x27;);
+var jade = require('jade');
 
 // compile
-var fn = jade.compile(&#x27;string of jade&#x27;, options);
+var fn = jade.compile('string of jade', options);
 var html = fn(locals);
 
 // render
-var html = jade.<span class="apidocCodeKeywordSpan">render</span>(&#x27;string of jade&#x27;, merge(options, locals));
+var html = jade.<span class="apidocCodeKeywordSpan">render</span>('string of jade', merge(options, locals));
 
 // renderFile
-var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
+var html = jade.renderFile('filename.jade', merge(options, locals));
 ```
 
 ### Options
@@ -399,10 +392,10 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
     <ul>
     <li>description and source-code<pre class="apidocCodePre">renderFile = function (path, options, fn){
   // support callback API
-  if (&#x27;function&#x27; == typeof options) {
+  if ('function' == typeof options) {
     fn = options, options = undefined;
   }
-  if (typeof fn === &#x27;function&#x27;) {
+  if (typeof fn === 'function') {
     var res
     try {
       res = exports.renderFile(path, options);
@@ -418,14 +411,14 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
   return handleTemplateCache(options)(options);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var fn = jade.compile(&#x27;string of jade&#x27;, options);
+var fn = jade.compile('string of jade', options);
 var html = fn(locals);
 
 // render
-var html = jade.render(&#x27;string of jade&#x27;, merge(options, locals));
+var html = jade.render('string of jade', merge(options, locals));
 
 // renderFile
-var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>(&#x27;filename.jade&#x27;, merge(options, locals));
+var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>('filename.jade', merge(options, locals));
 ```
 
 ### Options
@@ -451,3 +444,4 @@ var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>(&#x27;file
     ]
 </div>
 </div>
+</body></html>

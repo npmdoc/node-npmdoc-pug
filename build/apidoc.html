@@ -153,73 +153,6 @@
 
     </ol></li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.pug.runtime">module pug.runtime</a><ol>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.attr">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>attr
-            <span class="apidocSignatureSpan">(key, val, escaped, terse)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.attrs">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>attrs
-            <span class="apidocSignatureSpan">(obj, terse)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.classes">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>classes
-            <span class="apidocSignatureSpan">(val, escaping)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.escape">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>escape
-            <span class="apidocSignatureSpan">(_html)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.merge">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>merge
-            <span class="apidocSignatureSpan">(a, b)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.rethrow">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>rethrow
-            <span class="apidocSignatureSpan">(err, filename, lineno, str)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.pug.runtime.style">
-            function <span class="apidocSignatureSpan">pug.runtime.</span>style
-            <span class="apidocSignatureSpan">(val)</span>
-            </a>
-
-        </li>
-
-    </ol></li>
-
 </ol></div>
 
 <div class="apidocSectionDiv">
@@ -385,7 +318,23 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
   if (options.cache) exports.cache[key] = out;
   return out;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+
+
+var jade = require(&#x27;./&#x27;);
+var resolvedJade = require.resolve(&#x27;./&#x27;);
+
+function compileTemplate(module, filename) {
+var template = jade.<span class="apidocCodeKeywordSpan">compileFileClient</span>(filename, {inlineRuntimeFunctions: false});
+var body = &#x22;var jade = require(&#x27;&#x22; + resolvedJade + &#x22;&#x27;).runtime;\n\n&#x22; +
+           &#x22;module.exports = &#x22; + template + &#x22;;&#x22;;
+module._compile(body, filename);
+}
+
+if (require.extensions) {
+require.extensions[&#x27;.jade&#x27;] = compileTemplate
+...</pre></li>
     </ul>
 
 
@@ -492,238 +441,6 @@ var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>(&#x27;file
 
 
 
-
-
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.pug.runtime" id="apidoc.module.pug.runtime">module pug.runtime</a></h1>
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.attr" id="apidoc.element.pug.runtime.attr">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>attr
-        <span class="apidocSignatureSpan">(key, val, escaped, terse)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_attr(key, val, escaped, terse) {
-  if (val === false || val == null || !val &#x26;&#x26; (key === &#x27;class&#x27; || key === &#x27;style&#x27;)) {
-    return &#x27;&#x27;;
-  }
-  if (val === true) {
-    return &#x27; &#x27; + (terse ? key : key + &#x27;=&#x22;&#x27; + key + &#x27;&#x22;&#x27;);
-  }
-  if (typeof val.toISOString === &#x27;function&#x27;) {
-    val = val.toISOString();
-  } else if (typeof val !== &#x27;string&#x27;) {
-    val = JSON.stringify(val);
-    if (!escaped &#x26;&#x26; val.indexOf(&#x27;&#x22;&#x27;) !== -1) {
-      return &#x27; &#x27; + key + &#x27;=\&#x27;&#x27; + val.replace(/&#x27;/g, &#x27;&#x26;#39;&#x27;) + &#x27;\&#x27;&#x27;;
-    }
-  }
-  if (escaped) val = jade_escape(val);
-  return &#x27; &#x27; + key + &#x27;=&#x22;&#x27; + val + &#x27;&#x22;&#x27;;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.attrs" id="apidoc.element.pug.runtime.attrs">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>attrs
-        <span class="apidocSignatureSpan">(obj, terse)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_attrs(obj, terse){
-  var attrs = &#x27;&#x27;;
-
-  var keys = Object.keys(obj);
-  for (var i = 0; i &#x3c; keys.length; ++i) {
-    var key = keys[i]
-      , val = obj[key];
-
-    if (&#x27;class&#x27; === key) {
-      val = jade_classes(val);
-      attrs = jade_attr(key, val, false, terse) + attrs;
-      continue;
-    }
-    if (&#x27;style&#x27; === key) {
-      val = jade_style(val);
-    }
-    attrs += jade_attr(key, val, false, terse);
-  }
-
-  return attrs;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.classes" id="apidoc.element.pug.runtime.classes">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>classes
-        <span class="apidocSignatureSpan">(val, escaping)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_classes(val, escaping) {
-  if (Array.isArray(val)) {
-    return jade_classes_array(val, escaping);
-  } else if (val &#x26;&#x26; typeof val === &#x27;object&#x27;) {
-    return jade_classes_object(val);
-  } else {
-    return val || &#x27;&#x27;;
-  }
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.escape" id="apidoc.element.pug.runtime.escape">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>escape
-        <span class="apidocSignatureSpan">(_html)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_escape(_html){
-  var html = &#x27;&#x27; + _html;
-  var regexResult = jade_match_html.exec(html);
-  if (!regexResult) return _html;
-
-  var result = &#x27;&#x27;;
-  var i, lastIndex, escape;
-  for (i = regexResult.index, lastIndex = 0; i &#x3c; html.length; i++) {
-    switch (html.charCodeAt(i)) {
-      case 34: escape = &#x27;&#x26;quot;&#x27;; break;
-      case 38: escape = &#x27;&#x26;amp;&#x27;; break;
-      case 60: escape = &#x27;&#x26;lt;&#x27;; break;
-      case 62: escape = &#x27;&#x26;gt;&#x27;; break;
-      default: continue;
-    }
-    if (lastIndex !== i) result += html.substring(lastIndex, i);
-    lastIndex = i + 1;
-    result += escape;
-  }
-  if (lastIndex !== i) return result + html.substring(lastIndex, i);
-  else return result;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.merge" id="apidoc.element.pug.runtime.merge">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>merge
-        <span class="apidocSignatureSpan">(a, b)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i &#x3c; a.length; i++) {
-      attrs = jade_merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-
-  for (var key in b) {
-    if (key === &#x27;class&#x27;) {
-      var valA = a[key] || [];
-      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
-    } else if (key === &#x27;style&#x27;) {
-      var valA = jade_style(a[key]);
-      var valB = jade_style(b[key]);
-      a[key] = valA + (valA &#x26;&#x26; valB &#x26;&#x26; &#x27;;&#x27;) + valB;
-    } else {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.rethrow" id="apidoc.element.pug.runtime.rethrow">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>rethrow
-        <span class="apidocSignatureSpan">(err, filename, lineno, str)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_rethrow(err, filename, lineno, str){
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != &#x27;undefined&#x27; || !filename) &#x26;&#x26; !str) {
-    err.message += &#x27; on line &#x27; + lineno;
-    throw err;
-  }
-  try {
-    str = str || require(&#x27;fs&#x27;).readFileSync(filename, &#x27;utf8&#x27;)
-  } catch (ex) {
-    jade_rethrow(err, null, lineno)
-  }
-  var context = 3
-    , lines = str.split(&#x27;\n&#x27;)
-    , start = Math.max(lineno - context, 0)
-    , end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines.slice(start, end).map(function(line, i){
-    var curr = i + start + 1;
-    return (curr == lineno ? &#x27;  &#x3e; &#x27; : &#x27;    &#x27;)
-      + curr
-      + &#x27;| &#x27;
-      + line;
-  }).join(&#x27;\n&#x27;);
-
-  // Alter exception message
-  err.path = filename;
-  err.message = (filename || &#x27;Jade&#x27;) + &#x27;:&#x27; + lineno
-    + &#x27;\n&#x27; + context + &#x27;\n\n&#x27; + err.message;
-  throw err;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
-
-    <h2>
-        <a href="#apidoc.element.pug.runtime.style" id="apidoc.element.pug.runtime.style">
-        function <span class="apidocSignatureSpan">pug.runtime.</span>style
-        <span class="apidocSignatureSpan">(val)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function jade_style(val) {
-  if (!val) return &#x27;&#x27;;
-  if (typeof val === &#x27;object&#x27;) {
-    var out = &#x27;&#x27;, delim = &#x27;&#x27;;
-    for (var style in val) {
-<span class="apidocCodeCommentSpan">      /* istanbul ignore else */
-</span>      if (jade_has_own_property.call(val, style)) {
-        out = out + delim + style + &#x27;:&#x27; + val[style];
-        delim = &#x27;;&#x27;;
-      }
-    }
-    return out;
-  } else {
-    val = &#x27;&#x27; + val;
-    if (val[val.length - 1] === &#x27;;&#x27;) return val.slice(0, -1);
-    return val;
-  }
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
 
 
 </div>
