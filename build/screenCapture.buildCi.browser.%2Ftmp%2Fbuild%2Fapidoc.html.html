@@ -204,23 +204,7 @@
 
   return res;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-
-For full API, see [jade-lang.com/api](http://jade-lang.com/api/)
-
-```js
-var jade = require('jade');
-
-// compile
-var fn = jade.<span class="apidocCodeKeywordSpan">compile</span>('string of jade', options);
-var html = fn(locals);
-
-// render
-var html = jade.render('string of jade', merge(options, locals));
-
-// renderFile
-var html = jade.renderFile('filename.jade', merge(options, locals));
-...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 
@@ -363,22 +347,7 @@ require.extensions['.jade'] = compileTemplate
 
   return handleTemplateCache(options, str)(options);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-var jade = require('jade');
-
-// compile
-var fn = jade.compile('string of jade', options);
-var html = fn(locals);
-
-// render
-var html = jade.<span class="apidocCodeKeywordSpan">render</span>('string of jade', merge(options, locals));
-
-// renderFile
-var html = jade.renderFile('filename.jade', merge(options, locals));
-```
-
-### Options
-...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 
@@ -410,23 +379,7 @@ var html = jade.renderFile('filename.jade', merge(options, locals));
   options.filename = path;
   return handleTemplateCache(options)(options);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-var fn = jade.compile('string of jade', options);
-var html = fn(locals);
-
-// render
-var html = jade.render('string of jade', merge(options, locals));
-
-// renderFile
-var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>('filename.jade', merge(options, locals));
-```
-
-### Options
-
-- `filename`  Used in exceptions, and required when using includes
-- `compileDebug`  When `false` no debug instrumentation is compiled
-- `pretty`    Add pretty-indentation whitespace to output _(false by default)_
-...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 

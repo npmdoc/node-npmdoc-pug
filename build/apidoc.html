@@ -211,23 +211,7 @@
 
   return res;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-
-For full API, see [jade-lang.com/api](http://jade-lang.com/api/)
-
-```js
-var jade = require(&#x27;jade&#x27;);
-
-// compile
-var fn = jade.<span class="apidocCodeKeywordSpan">compile</span>(&#x27;string of jade&#x27;, options);
-var html = fn(locals);
-
-// render
-var html = jade.render(&#x27;string of jade&#x27;, merge(options, locals));
-
-// renderFile
-var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
-...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 
@@ -370,22 +354,7 @@ require.extensions[&#x27;.jade&#x27;] = compileTemplate
 
   return handleTemplateCache(options, str)(options);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-var jade = require(&#x27;jade&#x27;);
-
-// compile
-var fn = jade.compile(&#x27;string of jade&#x27;, options);
-var html = fn(locals);
-
-// render
-var html = jade.<span class="apidocCodeKeywordSpan">render</span>(&#x27;string of jade&#x27;, merge(options, locals));
-
-// renderFile
-var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
-```
-
-### Options
-...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 
@@ -417,23 +386,7 @@ var html = jade.renderFile(&#x27;filename.jade&#x27;, merge(options, locals));
   options.filename = path;
   return handleTemplateCache(options)(options);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
-var fn = jade.compile(&#x27;string of jade&#x27;, options);
-var html = fn(locals);
-
-// render
-var html = jade.render(&#x27;string of jade&#x27;, merge(options, locals));
-
-// renderFile
-var html = jade.<span class="apidocCodeKeywordSpan">renderFile</span>(&#x27;filename.jade&#x27;, merge(options, locals));
-```
-
-### Options
-
-- `filename`  Used in exceptions, and required when using includes
-- `compileDebug`  When `false` no debug instrumentation is compiled
-- `pretty`    Add pretty-indentation whitespace to output _(false by default)_
-...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
 
 
