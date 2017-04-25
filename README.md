@@ -1,9 +1,14 @@
-# api documentation for  [pug (v0.1.0)](http://jade-lang.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-pug.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-pug) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-pug.svg)](https://travis-ci.org/npmdoc/node-npmdoc-pug)
+# npmdoc-pug
+
+#### basic api documentation for  [pug (v0.1.0)](http://jade-lang.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-pug.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-pug) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-pug.svg)](https://travis-ci.org/npmdoc/node-npmdoc-pug)
+
 #### A clean, whitespace-sensitive template language for writing HTML
 
-[![NPM](https://nodei.co/npm/pug.png?downloads=true)](https://www.npmjs.com/package/pug)
+[![NPM](https://nodei.co/npm/pug.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/pug)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-pug/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-pug_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-pug/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-pug/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-pug/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-pug/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-pug/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-pug/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "TJ Holowaychuk",
-        "email": "tj@vision-media.ca"
+        "name": "TJ Holowaychuk"
     },
     "bin": {
         "jade": "./bin/jade.js"
@@ -86,17 +90,14 @@
     "main": "lib",
     "maintainers": [
         {
-            "name": "davidglivar",
-            "email": "davidglivar@gmail.com"
+            "name": "davidglivar"
         },
         {
-            "name": "forbeslindesay",
-            "email": "forbes@lindesay.co.uk"
+            "name": "forbeslindesay"
         }
     ],
     "name": "pug",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/jadejs/jade.git"
@@ -109,282 +110,6 @@
     },
     "version": "0.1.0"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module pug](#apidoc.module.pug)
-1.  [function <span class="apidocSignatureSpan">pug.</span>__express (path, options, fn)](#apidoc.element.pug.__express)
-1.  [function <span class="apidocSignatureSpan">pug.</span>compile (str, options)](#apidoc.element.pug.compile)
-1.  [function <span class="apidocSignatureSpan">pug.</span>compileClient (str, options)](#apidoc.element.pug.compileClient)
-1.  [function <span class="apidocSignatureSpan">pug.</span>compileClientWithDependenciesTracked (str, options)](#apidoc.element.pug.compileClientWithDependenciesTracked)
-1.  [function <span class="apidocSignatureSpan">pug.</span>compileFile (path, options)](#apidoc.element.pug.compileFile)
-1.  [function <span class="apidocSignatureSpan">pug.</span>compileFileClient (path, options)](#apidoc.element.pug.compileFileClient)
-1.  [function <span class="apidocSignatureSpan">pug.</span>render (str, options, fn)](#apidoc.element.pug.render)
-1.  [function <span class="apidocSignatureSpan">pug.</span>renderFile (path, options, fn)](#apidoc.element.pug.renderFile)
-1.  object <span class="apidocSignatureSpan">pug.</span>cache
-1.  object <span class="apidocSignatureSpan">pug.</span>filters
-1.  object <span class="apidocSignatureSpan">pug.</span>runtime
-
-
-
-# <a name="apidoc.module.pug"></a>[module pug](#apidoc.module.pug)
-
-#### <a name="apidoc.element.pug.__express"></a>[function <span class="apidocSignatureSpan">pug.</span>__express (path, options, fn)](#apidoc.element.pug.__express)
-- description and source-code
-```javascript
-__express = function (path, options, fn) {
-  if(options.compileDebug == undefined && process.env.NODE_ENV === 'production') {
-    options.compileDebug = false;
-  }
-  exports.renderFile(path, options, fn);
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.compile"></a>[function <span class="apidocSignatureSpan">pug.</span>compile (str, options)](#apidoc.element.pug.compile)
-- description and source-code
-```javascript
-compile = function (str, options){
-  var options = options || {}
-
-  str = String(str);
-
-  var parsed = compileBody(str, {
-    compileDebug: options.compileDebug !== false,
-    filename: options.filename,
-    basedir: options.basedir,
-    pretty: options.pretty,
-    doctype: options.doctype,
-    inlineRuntimeFunctions: options.inlineRuntimeFunctions,
-    globals: options.globals,
-    self: options.self,
-    includeSources: options.compileDebug === true,
-    debug: options.debug,
-    templateName: 'template'
-  });
-
-  var res = options.inlineRuntimeFunctions
-    ? new Function('', parsed.body + ';return template;')()
-    : runtimeWrap(parsed.body);
-
-  res.dependencies = parsed.dependencies;
-
-  return res;
-}
-```
-- example usage
-```shell
-...
-
-For full API, see [jade-lang.com/api](http://jade-lang.com/api/)
-
-'''js
-var jade = require('jade');
-
-// compile
-var fn = jade.compile('string of jade', options);
-var html = fn(locals);
-
-// render
-var html = jade.render('string of jade', merge(options, locals));
-
-// renderFile
-var html = jade.renderFile('filename.jade', merge(options, locals));
-...
-```
-
-#### <a name="apidoc.element.pug.compileClient"></a>[function <span class="apidocSignatureSpan">pug.</span>compileClient (str, options)](#apidoc.element.pug.compileClient)
-- description and source-code
-```javascript
-compileClient = function (str, options) {
-  return exports.compileClientWithDependenciesTracked(str, options).body;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.compileClientWithDependenciesTracked"></a>[function <span class="apidocSignatureSpan">pug.</span>compileClientWithDependenciesTracked (str, options)](#apidoc.element.pug.compileClientWithDependenciesTracked)
-- description and source-code
-```javascript
-compileClientWithDependenciesTracked = function (str, options){
-  var options = options || {};
-
-  str = String(str);
-  var parsed = compileBody(str, {
-    compileDebug: options.compileDebug,
-    filename: options.filename,
-    basedir: options.basedir,
-    pretty: options.pretty,
-    doctype: options.doctype,
-    inlineRuntimeFunctions: options.inlineRuntimeFunctions !== false,
-    globals: options.globals,
-    self: options.self,
-    includeSources: options.compileDebug,
-    debug: options.debug,
-    templateName: options.name || 'template'
-  });
-
-  return {body: parsed.body, dependencies: parsed.dependencies};
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.compileFile"></a>[function <span class="apidocSignatureSpan">pug.</span>compileFile (path, options)](#apidoc.element.pug.compileFile)
-- description and source-code
-```javascript
-compileFile = function (path, options) {
-  options = options || {};
-  options.filename = path;
-  return handleTemplateCache(options);
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.pug.compileFileClient"></a>[function <span class="apidocSignatureSpan">pug.</span>compileFileClient (path, options)](#apidoc.element.pug.compileFileClient)
-- description and source-code
-```javascript
-compileFileClient = function (path, options){
-  var key = path + ':client';
-  options = options || {};
-
-  options.filename = path;
-
-  if (options.cache && exports.cache[key]) {
-    return exports.cache[key];
-  }
-
-  var str = fs.readFileSync(options.filename, 'utf8');
-  var out = exports.compileClient(str, options);
-  if (options.cache) exports.cache[key] = out;
-  return out;
-}
-```
-- example usage
-```shell
-...
-
-
-
-var jade = require('./');
-var resolvedJade = require.resolve('./');
-
-function compileTemplate(module, filename) {
-var template = jade.compileFileClient(filename, {inlineRuntimeFunctions: false});
-var body = "var jade = require('" + resolvedJade + "').runtime;\n\n" +
-           "module.exports = " + template + ";";
-module._compile(body, filename);
-}
-
-if (require.extensions) {
-require.extensions['.jade'] = compileTemplate
-...
-```
-
-#### <a name="apidoc.element.pug.render"></a>[function <span class="apidocSignatureSpan">pug.</span>render (str, options, fn)](#apidoc.element.pug.render)
-- description and source-code
-```javascript
-render = function (str, options, fn){
-  // support callback API
-  if ('function' == typeof options) {
-    fn = options, options = undefined;
-  }
-  if (typeof fn === 'function') {
-    var res
-    try {
-      res = exports.render(str, options);
-    } catch (ex) {
-      return fn(ex);
-    }
-    return fn(null, res);
-  }
-
-  options = options || {};
-
-  // cache requires .filename
-  if (options.cache && !options.filename) {
-    throw new Error('the "filename" option is required for caching');
-  }
-
-  return handleTemplateCache(options, str)(options);
-}
-```
-- example usage
-```shell
-...
-var jade = require('jade');
-
-// compile
-var fn = jade.compile('string of jade', options);
-var html = fn(locals);
-
-// render
-var html = jade.render('string of jade', merge(options, locals));
-
-// renderFile
-var html = jade.renderFile('filename.jade', merge(options, locals));
-'''
-
-### Options
-...
-```
-
-#### <a name="apidoc.element.pug.renderFile"></a>[function <span class="apidocSignatureSpan">pug.</span>renderFile (path, options, fn)](#apidoc.element.pug.renderFile)
-- description and source-code
-```javascript
-renderFile = function (path, options, fn){
-  // support callback API
-  if ('function' == typeof options) {
-    fn = options, options = undefined;
-  }
-  if (typeof fn === 'function') {
-    var res
-    try {
-      res = exports.renderFile(path, options);
-    } catch (ex) {
-      return fn(ex);
-    }
-    return fn(null, res);
-  }
-
-  options = options || {};
-
-  options.filename = path;
-  return handleTemplateCache(options)(options);
-}
-```
-- example usage
-```shell
-...
-var fn = jade.compile('string of jade', options);
-var html = fn(locals);
-
-// render
-var html = jade.render('string of jade', merge(options, locals));
-
-// renderFile
-var html = jade.renderFile('filename.jade', merge(options, locals));
-'''
-
-### Options
-
-- 'filename'  Used in exceptions, and required when using includes
-- 'compileDebug'  When 'false' no debug instrumentation is compiled
-- 'pretty'    Add pretty-indentation whitespace to output _(false by default)_
-...
 ```
 
 
